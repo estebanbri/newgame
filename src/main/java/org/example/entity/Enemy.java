@@ -24,4 +24,9 @@ public class Enemy extends BaseEntity {
         g2.setColor(Color.RED);
         g2.fillRect(this.coordinates.x, this.coordinates.y, TILE_SIZE, TILE_SIZE);
     }
+
+    @Override
+    void loadImages() {
+
+    }
 }

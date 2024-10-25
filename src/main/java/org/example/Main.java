@@ -20,9 +20,8 @@ public class Main {
         List<BaseEntity> baseEntityList = List.of(player, enemy);
 
         MainScene mainScene = new MainScene(baseEntityList);
-        GameWindow.create(mainScene);
+        GameWindow.addScene(mainScene);
 
-        GameLoop gl = GameLoop.create(mainScene);
-        gl.startGame();
+        GameLoop.playScene(mainScene);
     }
 }

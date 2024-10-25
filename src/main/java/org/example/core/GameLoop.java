@@ -38,19 +38,15 @@ public class GameLoop extends Thread {
         }
     }
 
-    public void startGame() {
-        this.start();
-    }
-
     public void setRunning(boolean running) {
         this.running = running;
     }
 
-    public static GameLoop create(BaseGameScene gameScene) {
+    public static void playScene(BaseGameScene gameScene) {
         if(gameLoop == null) {
             gameLoop = new GameLoop(gameScene);
         }
-        return gameLoop;
+        gameLoop.start();;
     }
 
 
