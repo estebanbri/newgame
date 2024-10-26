@@ -3,6 +3,7 @@ package org.example.entity;
 import org.example.enums.Direction;
 import org.example.handler.KeyHandler;
 import org.example.behavior.Moveable;
+import org.example.handler.SpriteHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -10,18 +11,10 @@ import java.awt.image.BufferedImage;
 import static org.example.scene.BaseGameScene.TILE_SIZE;
 
 public class Player extends BaseEntity implements Moveable {
-
-    private BufferedImage[] up;
-    private BufferedImage[] down;
-    private BufferedImage[] right;
-    private BufferedImage[] left;
-
-    private int upSpriteIndex = 0;
-    private int downSpriteIndex = 0;
-    private int rightSpriteIndex = 0;
-    private int leftSpriteIndex = 0;
+    private  SpriteHandler spriteHandler = new SpriteHandler();
     public Player(Point coordinates, int speed) {
         super(coordinates, speed);
+        loadSprites();
     }
     @Override
     public void moveRight() {
@@ -69,34 +62,22 @@ public class Player extends BaseEntity implements Moveable {
     public void draw(Graphics2D g2) {
         BufferedImage currentImage = null;
         if (!this.isMoving) {
-            currentImage = this.down[0];
+            currentImage = this.spriteHandler.getStationarySprite();
         } else {
             switch (this.direction) {
-                case Direction.UP -> {
-                    upSpriteIndex = getSpriteIndex(this.up, upSpriteIndex);
-                    currentImage = this.up[upSpriteIndex];
-                }
-                case Direction.DOWN -> {
-                    downSpriteIndex = getSpriteIndex(this.down, downSpriteIndex);
-                    currentImage = this.down[downSpriteIndex];
-                }
-                case Direction.RIGHT -> {
-                    rightSpriteIndex = getSpriteIndex(this.right, rightSpriteIndex);
-                    currentImage = this.right[rightSpriteIndex];
-                }
-                case Direction.LEFT -> {
-                    leftSpriteIndex = getSpriteIndex(this.left, leftSpriteIndex);
-                    currentImage = this.left[leftSpriteIndex];
-                }
+                case Direction.UP   -> currentImage = this.spriteHandler.getNextSprite(Direction.UP);
+                case Direction.DOWN -> currentImage = this.spriteHandler.getNextSprite(Direction.DOWN);
+                case Direction.RIGHT-> currentImage = this.spriteHandler.getNextSprite(Direction.RIGHT);
+                case Direction.LEFT -> currentImage = this.spriteHandler.getNextSprite(Direction.LEFT);
             }
         }
         g2.drawImage(currentImage, this.coordinates.x, this.coordinates.y, TILE_SIZE, TILE_SIZE, null);
     }
     @Override
-    void loadImages() {
-        this.up = new BufferedImage[]{this.getImage("Player/Walking-sprites/boy_up_1.png"), this.getImage("Player/Walking-sprites/boy_up_2.png")};
-        this.down = new BufferedImage[]{this.getImage("Player/Walking-sprites/boy_down_1.png"), this.getImage("Player/Walking-sprites/boy_down_2.png")};
-        this.right = new BufferedImage[]{this.getImage("Player/Walking-sprites/boy_right_1.png"), this.getImage("Player/Walking-sprites/boy_right_2.png")};
-        this.left = new BufferedImage[]{this.getImage("Player/Walking-sprites/boy_left_1.png"), this.getImage("Player/Walking-sprites/boy_left_2.png")};
+    void loadSprites() {
+        this.spriteHandler.addSprites(Direction.UP, "Player/Walking-sprites/boy_up_1.png", "Player/Walking-sprites/boy_up_2.png");
+        this.spriteHandler.addSprites(Direction.DOWN, "Player/Walking-sprites/boy_down_1.png", "Player/Walking-sprites/boy_down_2.png");
+        this.spriteHandler.addSprites(Direction.RIGHT, "Player/Walking-sprites/boy_right_1.png", "Player/Walking-sprites/boy_right_2.png");
+        this.spriteHandler.addSprites(Direction.LEFT, "Player/Walking-sprites/boy_left_1.png", "Player/Walking-sprites/boy_left_2.png");
     }
 }

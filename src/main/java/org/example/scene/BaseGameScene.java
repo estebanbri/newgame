@@ -2,6 +2,7 @@ package org.example.scene;
 
 import org.example.handler.KeyHandler;
 import org.example.entity.BaseEntity;
+import org.example.handler.SpriteHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,6 +42,7 @@ public abstract class BaseGameScene extends JPanel {
     protected void paintComponent(Graphics g) { // DRAW
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        SpriteHandler.tick();
         for(BaseEntity baseEntity : this.baseEntityList) {
             baseEntity.draw(g2);
         }

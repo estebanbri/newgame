@@ -26,7 +26,7 @@ public class Enemy extends BaseEntity {
     }
 
     @Override
-    void loadImages() {
+    void loadSprites() {
 
     }
 }
