@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 import static org.example.scene.BaseGameScene.TILE_SIZE;
 
 public class Player extends BaseEntity implements Moveable {
-    private  SpriteHandler spriteHandler = new SpriteHandler();
+    private final SpriteHandler spriteHandler = new SpriteHandler();
     public Player(Point coordinates, int speed) {
         super(coordinates, speed);
         loadSprites();
