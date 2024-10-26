@@ -47,7 +47,7 @@ public class SpriteHandler {
             this.sprites = sprites;
         }
         BufferedImage getNextSprite() {
-            conditionalUpdateCurrentSpriteIndex();
+            setCurrentSpriteIndex();
             return this.sprites[this.currentSpriteIndex];
         }
 
@@ -59,7 +59,7 @@ public class SpriteHandler {
          * Este metodo va a servir de actualizar a la siguiente frame condicionalmente en caso de que el siguiente indice arrojado desborda el array
          * de sprites el indice se reinicia a 0 para generar un efecto de array circular de sprites.
          */
-        private void conditionalUpdateCurrentSpriteIndex() {
+        private void setCurrentSpriteIndex() {
             if(canDrawNextSprite()) {
                 currentSpriteIndex++;
             }
