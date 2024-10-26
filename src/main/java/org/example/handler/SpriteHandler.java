@@ -14,6 +14,9 @@ public class SpriteHandler {
     private static int tick;
     private final Map<Direction, SpriteContext> spritesMap = new EnumMap<>(Direction.class);
 
+    public static void tick() {
+        tick++;
+    }
     public BufferedImage getNextSprite(Direction direction) {
         final var spriteContext = this.spritesMap.get(direction);
         return spriteContext.getNextSprite();
@@ -22,10 +25,6 @@ public class SpriteHandler {
     public void addSprites(Direction direction, String... spritesPath) {
         BufferedImage[] sprites = Arrays.stream(spritesPath).map(this::getSpriteByPath).toArray(BufferedImage[]::new);
         spritesMap.putIfAbsent(direction, new SpriteContext(sprites));
-    }
-
-    public static void tick() {
-        tick++;
     }
 
     public BufferedImage getStationarySprite() {
@@ -38,20 +37,6 @@ public class SpriteHandler {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    /**
-     *  Metodo que controla cuando es el momento de pasar al siguiente sprite basandose en los ticks que se han ejecutado del event loop
-     *  Esto es util porque evitamos cambiar de sprite en cada tick del gameloop, ya que el gameloop cada tick lo hace extremadamente rapido
-     *  por eso se hace este control para decir cada X cantidad de ticks es el momento de pasar al siguiente sprite.
-     * @return true si es el momento de pasar a la siguiente sprite basandose en los ticks generados por el game loop
-     */
-    private static boolean canDrawNextSprite() {
-        if (tick >= TICK_NUMBER_TO_CHANGE_TO_NEXT_SPRITE) {
-            tick = 0;
-            return true;
-        }
-        return false;
     }
 
     private static class SpriteContext {
@@ -79,6 +64,20 @@ public class SpriteHandler {
                 currentSpriteIndex++;
             }
             currentSpriteIndex = currentSpriteIndex < sprites.length ? currentSpriteIndex : 0;
+        }
+
+        /**
+         *  Metodo que controla cuando es el momento de pasar al siguiente sprite basandose en los ticks que se han ejecutado del event loop
+         *  Esto es util porque evitamos cambiar de sprite en cada tick del gameloop, ya que el gameloop cada tick lo hace extremadamente rapido
+         *  por eso se hace este control para decir cada X cantidad de ticks es el momento de pasar al siguiente sprite.
+         * @return true si es el momento de pasar a la siguiente sprite basandose en los ticks generados por el game loop
+         */
+        private static boolean canDrawNextSprite() {
+            if (tick >= TICK_NUMBER_TO_CHANGE_TO_NEXT_SPRITE) {
+                tick = 0;
+                return true;
+            }
+            return false;
         }
 
     }
