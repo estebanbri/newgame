@@ -10,26 +10,40 @@ import java.awt.image.BufferedImage;
 import static org.example.scene.BaseGameScene.TILE_SIZE;
 
 public class Player extends BaseEntity implements Moveable {
+
+    private BufferedImage[] up;
+    private BufferedImage[] down;
+    private BufferedImage[] right;
+    private BufferedImage[] left;
+
+    private int upSpriteIndex = 0;
+    private int downSpriteIndex = 0;
+    private int rightSpriteIndex = 0;
+    private int leftSpriteIndex = 0;
     public Player(Point coordinates, int speed) {
         super(coordinates, speed);
     }
     @Override
     public void moveRight() {
+        this.isMoving = true;
         this.coordinates.x += this.speed;
     }
 
     @Override
     public void moveLeft() {
+        this.isMoving = true;
         this.coordinates.x -= this.speed;
     }
 
     @Override
     public void moveUp() {
+        this.isMoving = true;
         this.coordinates.y -= this.speed;
     }
 
     @Override
     public void moveDown() {
+        this.isMoving = true;
         this.coordinates.y += this.speed;
     }
     @Override
@@ -37,42 +51,52 @@ public class Player extends BaseEntity implements Moveable {
         if (KeyHandler.up) {
             this.moveUp();
             this.direction = Direction.UP;
-        }
-        if (KeyHandler.down) {
+        } else if (KeyHandler.down) {
             this.moveDown();
             this.direction = Direction.DOWN;
-        }
-        if (KeyHandler.right) {
+        }else if (KeyHandler.right) {
             this.moveRight();
             this.direction = Direction.RIGHT;
-        }
-        if (KeyHandler.left) {
+        }else if (KeyHandler.left) {
             this.moveLeft();
             this.direction = Direction.LEFT;
+        } else {
+            this.isMoving = false;
         }
     }
 
     @Override
     public void draw(Graphics2D g2) {
         BufferedImage currentImage = null;
-        switch (this.direction) {
-            case Direction.UP -> currentImage = this.up1;
-            case Direction.DOWN -> currentImage = this.down1;
-            case Direction.RIGHT -> currentImage = this.right1;
-            case Direction.LEFT -> currentImage = this.left1;
+        if (!this.isMoving) {
+            currentImage = this.down[0];
+        } else {
+            switch (this.direction) {
+                case Direction.UP -> {
+                    upSpriteIndex = getSpriteIndex(this.up, upSpriteIndex);
+                    currentImage = this.up[upSpriteIndex];
+                }
+                case Direction.DOWN -> {
+                    downSpriteIndex = getSpriteIndex(this.down, downSpriteIndex);
+                    currentImage = this.down[downSpriteIndex];
+                }
+                case Direction.RIGHT -> {
+                    rightSpriteIndex = getSpriteIndex(this.right, rightSpriteIndex);
+                    currentImage = this.right[rightSpriteIndex];
+                }
+                case Direction.LEFT -> {
+                    leftSpriteIndex = getSpriteIndex(this.left, leftSpriteIndex);
+                    currentImage = this.left[leftSpriteIndex];
+                }
+            }
         }
         g2.drawImage(currentImage, this.coordinates.x, this.coordinates.y, TILE_SIZE, TILE_SIZE, null);
     }
     @Override
     void loadImages() {
-        this.up1 = this.getImage("Player/Walking-sprites/boy_up_1.png");
-        this.up2 = this.getImage("Player/Walking-sprites/boy_up_2.png");
-        this.down1 = this.getImage("Player/Walking-sprites/boy_down_1.png");
-        this.down2 = this.getImage("Player/Walking-sprites/boy_down_2.png");
-        this.right1 = this.getImage("Player/Walking-sprites/boy_right_1.png");
-        this.right2 = this.getImage("Player/Walking-sprites/boy_right_2.png");
-        this.left1 = this.getImage("Player/Walking-sprites/boy_left_1.png");
-        this.left2 = this.getImage("Player/Walking-sprites/boy_left_2.png");
+        this.up = new BufferedImage[]{this.getImage("Player/Walking-sprites/boy_up_1.png"), this.getImage("Player/Walking-sprites/boy_up_2.png")};
+        this.down = new BufferedImage[]{this.getImage("Player/Walking-sprites/boy_down_1.png"), this.getImage("Player/Walking-sprites/boy_down_2.png")};
+        this.right = new BufferedImage[]{this.getImage("Player/Walking-sprites/boy_right_1.png"), this.getImage("Player/Walking-sprites/boy_right_2.png")};
+        this.left = new BufferedImage[]{this.getImage("Player/Walking-sprites/boy_left_1.png"), this.getImage("Player/Walking-sprites/boy_left_2.png")};
     }
-
 }

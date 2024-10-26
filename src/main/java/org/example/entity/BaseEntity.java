@@ -9,17 +9,12 @@ import java.io.IOException;
 
 public abstract class BaseEntity {
 
+    protected int frameCount = 0;
     protected Point coordinates;
     protected int speed;
     protected Direction direction;
-    protected BufferedImage up1;
-    protected BufferedImage up2;
-    protected BufferedImage down1;
-    protected BufferedImage down2;
-    protected BufferedImage right1;
-    protected BufferedImage right2;
-    protected BufferedImage left1;
-    protected BufferedImage left2;
+
+    protected boolean isMoving = false;
     BaseEntity(Point coordinates, int speed) {
         this.coordinates = coordinates;
         this.speed = speed;
@@ -38,9 +33,26 @@ public abstract class BaseEntity {
         }
     }
 
+    protected int getSpriteIndex(BufferedImage[] sprites, int spriteIndex) {
+        if(this.canDrawNextSprite()) {
+            spriteIndex++;
+        }
+        return spriteIndex < sprites.length ? spriteIndex : 0;
+    }
+
     public abstract void update();
 
     public abstract void draw(Graphics2D g2);
 
     abstract void loadImages();
+
+    private boolean canDrawNextSprite() {
+        // Este frameCount nos va a servir para setear cada 12 frame el cambio de sprint, esto es cada 10 frame porque sino la animacion quedaria muy rapida en la animacion de sprites
+        frameCount++;
+        if (frameCount == 12) {
+            frameCount = 0;
+            return true;
+        }
+        return false;
+    }
 }
