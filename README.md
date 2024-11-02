@@ -108,3 +108,8 @@ El metodo nanoTime() (1.000.000.000 nanosegundos = 1 segundo) es mas preciso que
 
 long drawInterval = ONE_SECOND_IN_NANO / FPS; // The allocated time for a single loop is 0.01666 seconds
 Quiere decir que cada vuelta de loop le va a tomar 0.01666 segundos para actualizar y repintar teniendo en cuenta que lo configuraste a 60FPS.
+
+
+## TODO List
+Crear una clase con mas jerarquia tal como AnimatedBaseEntity el cual va a contener un AnimatedSpriteHandler
+para que encapsule lo relacionado a BaseEntities que sean animadas y que de ahi herenden Player y Enemy
