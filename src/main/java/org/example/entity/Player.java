@@ -62,13 +62,13 @@ public class Player extends BaseEntity implements Moveable {
     public void draw(Graphics2D g2) {
         BufferedImage currentImage = null;
         if (!this.isMoving) {
-            currentImage = this.spriteHandler.getSpriteStationary(Direction.DOWN);
+            currentImage = this.spriteHandler.getIdleSprite(Direction.DOWN);
         } else {
             switch (this.direction) {
-                case Direction.UP   -> currentImage = this.spriteHandler.getSprite(Direction.UP);
-                case Direction.DOWN -> currentImage = this.spriteHandler.getSprite(Direction.DOWN);
-                case Direction.RIGHT-> currentImage = this.spriteHandler.getSprite(Direction.RIGHT);
-                case Direction.LEFT -> currentImage = this.spriteHandler.getSprite(Direction.LEFT);
+                case Direction.UP   -> currentImage = this.spriteHandler.getAnimatedSprite(Direction.UP);
+                case Direction.DOWN -> currentImage = this.spriteHandler.getAnimatedSprite(Direction.DOWN);
+                case Direction.RIGHT-> currentImage = this.spriteHandler.getAnimatedSprite(Direction.RIGHT);
+                case Direction.LEFT -> currentImage = this.spriteHandler.getAnimatedSprite(Direction.LEFT);
             }
         }
         g2.drawImage(currentImage, this.coordinates.x, this.coordinates.y, TILE_SIZE, TILE_SIZE, null);

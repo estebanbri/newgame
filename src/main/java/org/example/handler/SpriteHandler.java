@@ -17,12 +17,12 @@ public class SpriteHandler {
     public static void tick() {
         tick++;
     }
-    public BufferedImage getSprite(Direction direction) {
+    public BufferedImage getAnimatedSprite(Direction direction) {
         final var spriteContext = this.spritesMap.get(direction);
         return spriteContext.getAnimatedSprite();
     }
 
-    public BufferedImage getSpriteStationary(Direction direction) {
+    public BufferedImage getIdleSprite(Direction direction) {
         return this.spritesMap.get(direction).getIdleSprite();
     }
 
