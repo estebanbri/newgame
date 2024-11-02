@@ -8,7 +8,6 @@ public abstract class BaseEntity {
     protected Point coordinates;
     protected int speed;
     protected Direction direction;
-
     protected boolean isMoving = false;
     BaseEntity(Point coordinates, int speed) {
         this.coordinates = coordinates;

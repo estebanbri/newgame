@@ -1,25 +1,23 @@
 package org.example.entity;
 
 import org.example.handler.InanimateSpriteHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 
-import static org.example.scene.MainScene.TILE_SIZE;
+import static org.example.scene.BaseGameScene.TILE_SIZE;
 
-public class Enemy extends BaseEntity {
-
-    private static final Logger log = LoggerFactory.getLogger(Enemy.class);
+public class Tile extends BaseEntity {
     private final InanimateSpriteHandler inanimateSpriteHandler = new InanimateSpriteHandler();
-    public Enemy(Point coordinates) {
+    private final int mapIndex;
+    public Tile(Point coordinates, int mapIndex) {
         super(coordinates);
+        this.mapIndex = mapIndex;
         this.loadSprites();
     }
 
     @Override
     public void update() {
-        // TODO implementar move logic
+        // TODO mejorar arquitectura para que no pase esto de metodos vacios
     }
 
     @Override
@@ -29,7 +27,6 @@ public class Enemy extends BaseEntity {
 
     @Override
     void loadSprites() {
-        this.inanimateSpriteHandler.addSprite("Enemy/orc.png");
-        log.info("Enemy sprite loaded...");
+        this.inanimateSpriteHandler.addSprite("Tile/" + mapIndex + ".png");
     }
 }
