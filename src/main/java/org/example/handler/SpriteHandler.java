@@ -17,18 +17,18 @@ public class SpriteHandler {
     public static void tick() {
         tick++;
     }
-    public BufferedImage getNextSprite(Direction direction) {
+    public BufferedImage getSprite(Direction direction) {
         final var spriteContext = this.spritesMap.get(direction);
-        return spriteContext.getNextSprite();
+        return spriteContext.getAnimatedSprite();
+    }
+
+    public BufferedImage getSpriteStationary(Direction direction) {
+        return this.spritesMap.get(direction).getIdleSprite();
     }
 
     public void addSprites(Direction direction, String... spritesPath) {
         BufferedImage[] sprites = Arrays.stream(spritesPath).map(this::getSpriteByPath).toArray(BufferedImage[]::new);
         spritesMap.putIfAbsent(direction, new SpriteContext(sprites));
-    }
-
-    public BufferedImage getStationarySprite() {
-        return this.spritesMap.get(Direction.DOWN).getStationarySprite();
     }
 
     private BufferedImage getSpriteByPath(String path) {
@@ -46,12 +46,12 @@ public class SpriteHandler {
         SpriteContext(BufferedImage[] sprites) {
             this.sprites = sprites;
         }
-        BufferedImage getNextSprite() {
+        BufferedImage getAnimatedSprite() {
             setCurrentSpriteIndex();
             return this.sprites[this.currentSpriteIndex];
         }
 
-        BufferedImage getStationarySprite() {
+        BufferedImage getIdleSprite() {
             return this.sprites[0];
         }
 
