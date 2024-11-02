@@ -1,8 +1,8 @@
-package org.example.handler;
+package org.example.engine.handler;
 
-import org.example.entity.BaseEntity;
-import org.example.entity.Tile;
-import org.example.scene.BaseGameScene;
+import org.example.engine.entity.BaseEntity;
+import org.example.engine.entity.Tile;
+import org.example.engine.scene.BaseGameScene;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,8 +59,8 @@ public class TilesHandler {
         int x = 0;
         int y = 0;
         List<BaseEntity> tileResult = new ArrayList<>();
-        for (int[] tilesIndex : mapTilesIndex) { // barriendo por columna
-            for (int index : tilesIndex) { // barriendo por fila
+        for (int[] tilesIndex : mapTilesIndex) { // barriendo por fila del map.txt
+            for (int index : tilesIndex) { // barriendo por columna del map.txt
                 tileResult.add(new Tile(new Point(x, y), index));
                 y += BaseGameScene.TILE_SIZE;
             }

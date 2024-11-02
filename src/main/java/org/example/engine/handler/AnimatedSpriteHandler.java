@@ -1,6 +1,6 @@
-package org.example.handler;
+package org.example.engine.handler;
 
-import org.example.enums.Direction;
+import org.example.engine.enums.Direction;
 
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
@@ -11,12 +11,7 @@ public class AnimatedSpriteHandler implements SpriteHandler {
     public static final int TICK_NUMBER_TO_CHANGE_TO_NEXT_SPRITE = 12;
     private static int tick;
     private final Map<Direction, SpriteContext> spritesMap = new EnumMap<>(Direction.class);
-
     private Direction direction;
-
-    public static void tick() {
-        tick++;
-    }
 
     @Override
     public BufferedImage getSprite() {
@@ -24,15 +19,19 @@ public class AnimatedSpriteHandler implements SpriteHandler {
         return spriteContext.getSprite();
     }
 
-    public BufferedImage getIdleSprite(Direction direction) {
-        return this.spritesMap.get(direction).getIdleSprite();
-    }
-
+    @Override
     public void addSprite(String... spritesPath) {
         BufferedImage[] sprites = Arrays.stream(spritesPath).map(this::getSpriteByPath).toArray(BufferedImage[]::new);
         spritesMap.putIfAbsent(this.direction, new SpriteContext(sprites));
     }
 
+    public static void tick() {
+        tick++;
+    }
+
+    public BufferedImage getIdleSprite(Direction direction) {
+        return this.spritesMap.get(direction).getIdleSprite();
+    }
     public void setDirection(Direction direction)  {
         this.direction = direction;
     }

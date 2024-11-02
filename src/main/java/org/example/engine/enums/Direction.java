@@ -1,4 +1,4 @@
-package org.example.enums;
+package org.example.engine.enums;
 
 public enum Direction {
     UP,

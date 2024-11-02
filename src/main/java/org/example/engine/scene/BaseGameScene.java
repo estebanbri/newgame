@@ -1,8 +1,8 @@
-package org.example.scene;
+package org.example.engine.scene;
 
-import org.example.handler.KeyHandler;
-import org.example.entity.BaseEntity;
-import org.example.handler.AnimatedSpriteHandler;
+import org.example.engine.handler.KeyHandler;
+import org.example.engine.entity.BaseEntity;
+import org.example.engine.handler.AnimatedSpriteHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +23,7 @@ public abstract class BaseGameScene extends JPanel {
 
     protected final List<BaseEntity> baseEntityList;
 
-    BaseGameScene(List<BaseEntity> baseEntityList) {
+    protected BaseGameScene(List<BaseEntity> baseEntityList) {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(Color.GRAY);
         this.setDoubleBuffered(true); // mejora la performance del rendering

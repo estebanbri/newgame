@@ -1,4 +1,4 @@
-package org.example.handler;
+package org.example.engine.handler;
 
 import java.awt.image.BufferedImage;
 

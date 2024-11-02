@@ -1,6 +1,6 @@
-package org.example.core;
+package org.example.engine.core;
 
-import org.example.scene.BaseGameScene;
+import org.example.engine.scene.BaseGameScene;
 
 import javax.swing.*;
 

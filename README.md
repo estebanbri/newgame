@@ -19,9 +19,9 @@ while(running) {
             long nextDrawTime = System.nanoTime() + drawInterval;
 
             // 1. UPDATE: update character information sucha as character position
-            mainScene.update();
+            firstLevelScene.update();
             // 2. DRAW: draw the screen with the updated information
-            mainScene.repaint();
+            firstLevelScene.repaint();
 
             long remainingTime = nextDrawTime - System.nanoTime();
             long remainingTimeAsMilliseconds = remainingTime / 1000000;
@@ -45,9 +45,9 @@ double delta = 0;
         lastTime = currentTime;
         if(delta >= 1) {
         // 1. UPDATE: update character information sucha as character position
-        mainScene.update();
+        firstLevelScene.update();
         // 2. DRAW: draw the screen with the updated information
-        mainScene.repaint();
+        firstLevelScene.repaint();
         delta--;
         }
         }

@@ -1,14 +1,14 @@
-package org.example.handler;
+package org.example.engine.handler;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-    public static boolean up;
-    public static boolean down;
-    public static boolean left;
-    public static boolean right;
+    public static boolean UP;
+    public static boolean DOWN;
+    public static boolean LEFT;
+    public static boolean RIGHT;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -18,16 +18,16 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         if(code == KeyEvent.VK_W) {
-            up = true;
+            UP = true;
         }
         if(code == KeyEvent.VK_S) {
-            down = true;
+            DOWN = true;
         }
         if(code == KeyEvent.VK_A) {
-            left = true;
+            LEFT = true;
         }
         if(code == KeyEvent.VK_D) {
-            right = true;
+            RIGHT = true;
         }
     }
 
@@ -35,16 +35,16 @@ public class KeyHandler implements KeyListener {
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
         if(code == KeyEvent.VK_W) {
-            up = false;
+            UP = false;
         }
         if(code == KeyEvent.VK_S) {
-            down = false;
+            DOWN = false;
         }
         if(code == KeyEvent.VK_A) {
-            left = false;
+            LEFT = false;
         }
         if(code == KeyEvent.VK_D) {
-            right = false;
+            RIGHT = false;
         }
     }
 
