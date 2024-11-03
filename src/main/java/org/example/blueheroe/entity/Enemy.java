@@ -7,13 +7,25 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Enemy extends AnimatedBaseEntity {
+
+    private int rightCounter;
+    private int leftCounter;
     public Enemy(Point coordinates, int speed) {
         super(coordinates, speed);
         loadSprites();
     }
     @Override
     public void update() {
-        this.moveRight();
+        if (rightCounter < 100) {
+            this.moveRight();
+            rightCounter++;
+        } else  if (leftCounter < 100){
+            this.moveLeft();
+            leftCounter++;
+        } else {
+            rightCounter = 0;
+            leftCounter = 0;
+        }
     }
 
     @Override

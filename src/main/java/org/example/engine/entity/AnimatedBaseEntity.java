@@ -1,11 +1,8 @@
 package org.example.engine.entity;
 
-import org.example.blueheroe.entity.Player;
 import org.example.engine.behavior.Movable;
 import org.example.engine.enums.Direction;
 import org.example.engine.handler.AnimatedSpriteHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,7 +11,6 @@ import static org.example.engine.scene.BaseGameScene.TILE_SIZE;
 
 public abstract class AnimatedBaseEntity extends BaseEntity implements Movable {
 
-    private static final Logger log = LoggerFactory.getLogger(Player.class);
     protected final AnimatedSpriteHandler animatedSpriteHandler = new AnimatedSpriteHandler();
     protected AnimatedBaseEntity(Point coordinates, int speed) {
         super(coordinates, speed);
